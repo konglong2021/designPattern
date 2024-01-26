@@ -24,6 +24,6 @@ public class DecoratorTest {
         System.out.println(doublePepperoni.getDescription());
         System.out.println(doublePepperoni.getCost());
 
-        Assertions.assertEquals(doublePepperoni.getCost(),(pepperoni.getCost() .add(new BigDecimal(1.50))));
+        Assertions.assertEquals(doublePepperoni.getCost(),(pepperoni.getCost() .add(new BigDecimal("1.50"))));
     }
 }
