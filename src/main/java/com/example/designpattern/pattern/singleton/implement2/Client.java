@@ -10,5 +10,9 @@ public class Client {
         if (c1 == c2){
             System.out.println("c1 and c2 are same instance");
         }
+
+        Captain.CaptainDerived derived1 = c1.new CaptainDerived();
+        Captain.CaptainDerived derived2 = c1.new CaptainDerived();
+
     }
 }

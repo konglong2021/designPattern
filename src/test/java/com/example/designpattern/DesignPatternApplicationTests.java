@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.*;
+
 @SpringBootTest
 class DesignPatternApplicationTests {
 
@@ -42,4 +44,39 @@ public void testSingleton() {
         Assertions.assertSame(false1,false2);
         Assertions.assertNotSame(true1,true2);
     }
+
+    @Test
+    void wildcards(){
+        List<List<?>> lists = new ArrayList<List<?>>();
+        lists.add(List.of(1,2,3));
+        lists.add(List.of("four","five"));
+        assert lists.equals(List.of(List.of(1, 2, 3), List.of("four", "five")));
+        assert lists.getFirst().getFirst().toString().equals("1");
+    }
+
+    @Test
+    void restrictionWildCard(){
+        List<Number> nums = new ArrayList<Number>();
+        List<? super Number> sink = nums;
+        List<? extends Number> source = nums;
+        for (int i=0; i<4; i++) sink.add(i);
+        int sum = nums.stream().mapToInt(Number::intValue).sum();
+        assert sum == 6;
+    }
+
+    @Test
+    void comparator(){
+        Comparator<String> sizeOrder =
+                new Comparator<>() {
+                    public int compare(String s1, String s2) {
+                        return
+                                s1.length() < s2.length() ? -1 :
+                                        s1.length() > s2.length() ? 1 :
+                                                s1.compareTo(s2) ;
+                    }
+                };
+        assert "two".compareTo("three") > 0;
+        assert sizeOrder.compare("two","three") < 0;
+    }
+
 }
