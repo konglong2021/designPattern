@@ -12,6 +12,6 @@ public class Client {
         branche1.add(leaf3).add(leaf4);
         leaf.add(branche1);
         branche.add(leaf).add(leaf2);
-        branche.printStructure();
+        branche1.printStructure();
     }
 }
