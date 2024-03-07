@@ -31,8 +31,8 @@ public class RSA {
             System.out.println(base64EncodedPrivateKey);
 
 
-//            System.out.println(generateRsaPublicKeyString(2048));
-//            System.out.println(generateRsaPrivateKeyString(2048));
+            System.out.println(generateRsaPublicKeyString(2048));
+            System.out.println(generateRsaPrivateKeyString(2048));
             keyPair = keyRSAPair(2048);
             String encrypt = encrypt("hello",keyPair.getPublic());
             System.out.println("Encrypted : " + encrypt);
