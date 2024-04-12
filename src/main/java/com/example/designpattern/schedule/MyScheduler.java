@@ -8,8 +8,8 @@ import java.util.Date;
 @Service
 public class MyScheduler {
 
-    @Scheduled(cron = "0 0/1 * 1/1 * ?")
+    @Scheduled(cron = "0 0/1 * 1/1 * ? ")
     public void firstScheduler() {
-        System.out.println(new Date());
+        System.out.println("hello world! " + new Date());
     }
 }
