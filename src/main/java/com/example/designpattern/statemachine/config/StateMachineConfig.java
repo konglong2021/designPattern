@@ -18,8 +18,8 @@ import org.springframework.statemachine.state.State;
 import java.util.EnumSet;
 
 
-@Configuration
-@EnableStateMachine
+//@Configuration
+//@EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
 
 

@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.statemachine.StateMachine;
 
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 public class DesignPatternApplication implements CommandLineRunner{
 
@@ -19,14 +19,14 @@ public class DesignPatternApplication implements CommandLineRunner{
         SpringApplication.run(DesignPatternApplication.class, args);
     }
 
-    @Autowired
-    private StateMachine<States, Events> stateMachine;
+//    @Autowired
+//    private StateMachine<States, Events> stateMachine;
 
     @Override
     public void run(String... args) throws Exception {
-        stateMachine.sendEvent(Events.E1);
-        stateMachine.sendEvent(Events.E2);
-        stateMachine.sendEvent(Events.E3);
+//        stateMachine.sendEvent(Events.E1);
+//        stateMachine.sendEvent(Events.E2);
+//        stateMachine.sendEvent(Events.E3);
 
     }
 
