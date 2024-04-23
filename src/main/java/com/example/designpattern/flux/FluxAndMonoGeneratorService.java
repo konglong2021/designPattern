@@ -15,7 +15,6 @@ public class FluxAndMonoGeneratorService {
         return Mono.just("alex1")
                 .log();
     }
-
     public static void main(String[] args){
         FluxAndMonoGeneratorService service = new FluxAndMonoGeneratorService();
         service.nameFlux().subscribe(name -> System.out.println("Name is :" + name));

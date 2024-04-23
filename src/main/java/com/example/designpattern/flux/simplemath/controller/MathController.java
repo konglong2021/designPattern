@@ -13,8 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/math")
 public class MathController {
-    @Autowired
-    private MathService mathService;
+
+    private final  MathService mathService;
+
+    public MathController(MathService mathService) {
+        this.mathService = mathService;
+    }
 
     @GetMapping("/square/{input}")
     public ResponseDto findSquare(@PathVariable int input){
