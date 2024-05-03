@@ -8,7 +8,6 @@ public class GenericMethodTest {
     @Test
     public void testGenericMethod(){
         GenericMethod method = new GenericMethod();
-        System.out.println("Item is returned: " + method.showItem(123));
     }
 
     @Test
@@ -22,7 +21,6 @@ public class GenericMethodTest {
     @Test
     public void testGenericMethod3(){
         GenericMethod method = new GenericMethod();
-
         boolean falseResult = method.checkEquality(10,44);
         boolean trueResult = method.checkEquality(10.5,10.5);
         Assertions.assertFalse(falseResult);
