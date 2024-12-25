@@ -17,7 +17,9 @@
         <java.version>21</java.version>
         <spring-statemachine.version>4.0.0</spring-statemachine.version>
         <querydsl.version>5.0.0</querydsl.version>
+        <itext.pdfcalligraph.version>4.0.2</itext.pdfcalligraph.version>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
@@ -111,6 +113,18 @@
         </dependency>
 
 
+<!--        <dependency>-->
+<!--            <groupId>com.itextpdf</groupId>-->
+<!--            <artifactId>itext7-core</artifactId>-->
+<!--            <version>7.2.5</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.20.0</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -166,6 +180,7 @@
 
     </build>
 
+
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -183,6 +198,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
     </repositories>
     <pluginRepositories>
         <pluginRepository>

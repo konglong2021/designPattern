@@ -3,8 +3,8 @@ package com.example.designpattern.database.service.Impl;
 import com.example.designpattern.database.entity.Task;
 import com.example.designpattern.database.repository.TaskRepository;
 import com.example.designpattern.database.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
-    @Autowired
 
     public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -40,6 +39,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public void completeTask(Long id) {
         Task task = getTask(id);
         if (task.getIsCompleted()) {
@@ -49,6 +49,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public void reopenTask(Long id) {
         Task task = getTask(id);
         if (!task.getIsCompleted()) {
@@ -64,21 +65,21 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getIncompleteTasks() {
-        return taskRepository.getIncompleteTasks();
+        return taskRepository.findByIsCompletedFalse();
     }
 
     @Override
     public List<Task> getCompletedTasks() {
-        return taskRepository.getCompletedTasks();
+        return taskRepository.findByIsCompletedTrue();
     }
 
     @Override
     public List<Task> getTasksByStatus(Integer status) {
-        return taskRepository.getTasksByStatus(status);
+        return taskRepository.findByStatus(status);
     }
 
     @Override
     public List<Task> getTasksByEmployee(Long employeeId) {
-        return taskRepository.getTasksByEmployeeId(employeeId);
+        return taskRepository.findByEmployeeId(employeeId);
     }
 }

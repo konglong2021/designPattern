@@ -1,8 +1,11 @@
 package com.example.designpattern.service;
 
 import com.example.designpattern.database.entity.Employee;
+import com.example.designpattern.database.entity.QEmployee;
 import com.example.designpattern.database.repository.EmployeeRepository;
 import com.example.designpattern.database.service.Impl.EmployeeServiceImpl;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +30,12 @@ public class EmployeeServiceTest {
     @Mock
     private EmployeeRepository employeeRepository;
 
+    @Mock
+    private EntityManager em;
+
+    @Mock
+    private QEmployee qEmployee;
+
     @InjectMocks
     private EmployeeServiceImpl employeeService;
 //    private EmployeeService employeeService;
@@ -50,8 +59,14 @@ public class EmployeeServiceTest {
     @DisplayName("Test for save Employee Method")
     public void giveEmployeeObject_whenSave_thenReturnEmployeeObject(){
         //given - precondition or setup
-        given(employeeRepository.findByEmail(employee.getEmail())).willReturn(null);
-        given(employeeRepository.save(employee)).willReturn(employee);
+        BDDMockito.given(employeeRepository.save(employee)).willReturn(employee);
+
+        // Mock JPAQueryFactory behavior
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        Mockito.when(queryFactory.selectFrom(qEmployee).where(qEmployee.email.eq(employee.getEmail())).fetchOne()).thenReturn(null);
+
+        // Mock EntityManager to return the query factory
+        Mockito.when(em.getDelegate()).thenReturn(queryFactory);
 
         //when - action or the behaviour that we are going test
         Employee saveEmployee = employeeService.saveEmployee(employee);

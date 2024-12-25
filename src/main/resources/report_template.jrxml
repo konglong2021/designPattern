@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="KhmerReport"
+              pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="123e4567-e89b-12d3-a456-426614174000">
+    <detail>
+        <band height="50">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="50" uuid="2e0e51ec-b215-4c59-a30b-67b3e3d034ed"/>
+                <textElement>
+                    <font fontName="KhmerOS" isPdfEmbedded="true" size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["សួស្តី ពិភពលោក! នេះគឺជាឯកសារដែលប្រើអក្សរខ្មែរ។"]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

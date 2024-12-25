@@ -7,6 +7,7 @@ import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
+import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
@@ -18,65 +19,30 @@ import org.springframework.statemachine.state.State;
 import java.util.EnumSet;
 
 
-//@Configuration
-//@EnableStateMachine
-public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
-
-
-    @Override
-    public void configure(StateMachineConfigurationConfigurer<States, Events> config) throws Exception {
-        config.withConfiguration()
-                .autoStartup(true)
-                .listener(listener());
-    }
+@Configuration
+@EnableStateMachine
+public class StateMachineConfig extends StateMachineConfigurerAdapter<States,Events>{
 
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states.withStates()
-                .initial(States.S1)
-                .states(EnumSet.allOf(States.class));
+               .initial(States.CREATED)
+               .states(EnumSet.allOf(States.class));
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {
-        transitions.withExternal()
-                    .source(States.S1).target(States.S2).event(Events.E1).guard(guard())
-                    .and()
-                .withInternal()
-                    .source(States.S2).event(Events.E2).action(action())
-                    .and()
-                .withLocal()
-                .source(States.S2).target(States.S3).event(Events.E3).guardExpression("true");
-    }
-
-    @Bean
-    public Guard<States,Events> guard(){
-        return new Guard<States, Events>() {
-            @Override
-            public boolean evaluate(StateContext<States, Events> stateContext) {
-                return true;
-            }
-        };
-    }
-
-    @Bean
-    public StateMachineListener<States, Events> listener() {
-        return new StateMachineListenerAdapter<States, Events>() {
-            @Override
-            public void stateChanged(State<States, Events> from, State<States, Events> to) {
-                System.out.println("State change to " + to.getId());
-            }
-        };
-    }
-
-    @Bean
-    public Action<States,Events> action(){
-        return new Action<States, Events>() {
-            @Override
-            public void execute(StateContext<States, Events> stateContext) {
-                System.out.println("This is action: "+ stateContext.getStateMachine().getState().getId());
-            }
-        };
+        transitions
+                .withExternal().source(States.CREATED).target(States.PENDING_APPROVAL_1).event(Events.SUBMIT)
+                .and()
+                .withExternal().source(States.PENDING_APPROVAL_1).target(States.PENDING_APPROVAL_2).event(Events.APPROVE_1)
+                .and()
+                .withExternal().source(States.PENDING_APPROVAL_2).target(States.APPROVED).event(Events.APPROVE_2)
+                .and()
+                .withExternal().source(States.PENDING_APPROVAL_1).target(States.REJECTED).event(Events.REJECT)
+                .and()
+                .withExternal().source(States.PENDING_APPROVAL_2).target(States.REJECTED).event(Events.REJECT);
     }
 }
+
 

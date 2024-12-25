@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    private Employee getEmployeeByEmail(String email) {
+    public Employee getEmployeeByEmail(String email) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         QEmployee employee = QEmployee.employee;
         return queryFactory.selectFrom(employee).where(employee.email.eq(email)).fetchOne();

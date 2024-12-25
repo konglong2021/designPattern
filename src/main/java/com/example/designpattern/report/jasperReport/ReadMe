@@ -1,0 +1,4 @@
+1. design everything with jrxml
+2. config font extension with jasperreports_extension.properties
+3. compile .jrxml to .jasper
+4. usage the .jasper

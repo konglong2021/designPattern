@@ -15,21 +15,21 @@ public abstract class TaskRepositoryImpl implements TaskRepository {
     private EntityManager em;
     public static final Integer STATUS_COMPLETED = 1 ;
     private static final  QTask task = QTask.task;
-    @Override
-    public List<Task> getTasksByEmployeeId(Long employeeId) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        return queryFactory.selectFrom(task)
-               .where(task.employee.id.eq(employeeId))
-               .fetch();
-    }
-
-    @Override
-    public List<Task> getTasksByStatus(Integer status) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        return queryFactory.selectFrom(task)
-               .where(task.status.eq(status))
-               .fetch();
-    }
+//    @Override
+//    public List<Task> getTasksByEmployeeId(Long employeeId) {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//        return queryFactory.selectFrom(task)
+//               .where(task.employee.id.eq(employeeId))
+//               .fetch();
+//    }
+//
+//    @Override
+//    public List<Task> getTasksByStatus(Integer status) {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//        return queryFactory.selectFrom(task)
+//               .where(task.status.eq(status))
+//               .fetch();
+//    }
 
     @Override
     public void completeTask(Long id) {
@@ -49,26 +49,26 @@ public abstract class TaskRepositoryImpl implements TaskRepository {
                .execute();
     }
 
-    @Override
-    public List<Task> getAllTasks() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        return queryFactory.selectFrom(task)
-               .fetch();
-    }
-
-    @Override
-    public List<Task> getIncompleteTasks() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        return queryFactory.selectFrom(task)
-               .where(task.isCompleted.eq(false))
-               .fetch();
-    }
-
-    @Override
-    public List<Task> getCompletedTasks() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        return queryFactory.selectFrom(task)
-               .where(task.isCompleted.eq(true))
-               .fetch();
-    }
+//    @Override
+//    public List<Task> getAllTasks() {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//        return queryFactory.selectFrom(task)
+//               .fetch();
+//    }
+//
+//    @Override
+//    public List<Task> getIncompleteTasks() {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//        return queryFactory.selectFrom(task)
+//               .where(task.isCompleted.eq(false))
+//               .fetch();
+//    }
+//
+//    @Override
+//    public List<Task> getCompletedTasks() {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//        return queryFactory.selectFrom(task)
+//               .where(task.isCompleted.eq(true))
+//               .fetch();
+//    }
 }
