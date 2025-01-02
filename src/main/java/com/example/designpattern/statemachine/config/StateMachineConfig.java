@@ -19,14 +19,23 @@ import org.springframework.statemachine.state.State;
 import java.util.EnumSet;
 
 
-@Configuration
-@EnableStateMachine
+//@Configuration
+//@EnableStateMachine
 public class StateMachineConfig extends StateMachineConfigurerAdapter<States,Events>{
+
+    @Override
+    public void configure(StateMachineConfigurationConfigurer<States, Events> config)
+            throws Exception {
+        config
+                .withConfiguration()
+                .autoStartup(true)
+                .listener(listener());
+    }
 
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states.withStates()
-               .initial(States.CREATED)
+               .initial(States.CREATED) //get current state
                .states(EnumSet.allOf(States.class));
     }
 
@@ -42,6 +51,17 @@ public class StateMachineConfig extends StateMachineConfigurerAdapter<States,Eve
                 .withExternal().source(States.PENDING_APPROVAL_1).target(States.REJECTED).event(Events.REJECT)
                 .and()
                 .withExternal().source(States.PENDING_APPROVAL_2).target(States.REJECTED).event(Events.REJECT);
+    }
+
+    @Bean
+    public StateMachineListener<States, Events> listener() {
+        return new StateMachineListenerAdapter<States, Events>() {
+            @Override
+            public void stateChanged(State<States, Events> from, State<States, Events> to) {
+                //Logic to save current state to database
+                System.out.println("State change to " + to.getId());
+            }
+        };
     }
 }
 

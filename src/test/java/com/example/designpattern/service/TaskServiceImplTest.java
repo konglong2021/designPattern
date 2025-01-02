@@ -151,7 +151,7 @@ public class TaskServiceImplTest {
     @Test
     void testGetIncompleteTasks() {
         List<Task> incompleteTasks = Collections.singletonList(new Task());
-        when(taskRepository.getIncompleteTasks()).thenReturn(incompleteTasks);
+        when(taskRepository.findByIsCompletedFalse()).thenReturn(incompleteTasks);
 
         List<Task> result = taskService.getIncompleteTasks();
 
@@ -161,7 +161,7 @@ public class TaskServiceImplTest {
     @Test
     void testGetCompletedTasks() {
         List<Task> completedTasks = Collections.singletonList(new Task());
-        when(taskRepository.getCompletedTasks()).thenReturn(completedTasks);
+        when(taskRepository.findByIsCompletedTrue()).thenReturn(completedTasks);
 
         List<Task> result = taskService.getCompletedTasks();
 
@@ -172,7 +172,7 @@ public class TaskServiceImplTest {
     void testGetTasksByStatus() {
         Integer status = 1;
         List<Task> tasks = Collections.singletonList(new Task());
-        when(taskRepository.getTasksByStatus(status)).thenReturn(tasks);
+        when(taskRepository.findByStatus(status)).thenReturn(tasks);
 
         List<Task> result = taskService.getTasksByStatus(status);
 
@@ -183,7 +183,7 @@ public class TaskServiceImplTest {
     void testGetTasksByEmployee() {
         Long employeeId = 1L;
         List<Task> tasks = Collections.singletonList(new Task());
-        when(taskRepository.getTasksByEmployeeId(employeeId)).thenReturn(tasks);
+        when(taskRepository.findByEmployeeId(employeeId)).thenReturn(tasks);
 
         List<Task> result = taskService.getTasksByEmployee(employeeId);
 
